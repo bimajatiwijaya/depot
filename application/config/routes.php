@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "tracer";
+$route['default_controller'] = "backend";
 $route['404_override'] = '';
 
 
