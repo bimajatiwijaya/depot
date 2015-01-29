@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "backend";
+$route['default_controller'] = "petugas";
 $route['404_override'] = '';
 
 
