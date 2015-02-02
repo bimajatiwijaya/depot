@@ -8,7 +8,6 @@
 				</div>
 			</div>
 		</div>
-        
         <div class="section">
 	    	<div class="container">
 				<div class="row">
@@ -38,7 +37,7 @@
 					<div class="col-sm-7 social-login">
 						<div class="clearfix"><?php if(isset($message)){echo '<strong>'.$message.'</strong>'; } ?></div>
 						<div class="not-member">
-							<p>Not a member? <?php echo anchor('tracer/formregistrasi','Register here'); ?></p>
+							
 						</div>
 					</div>
 				</div>
