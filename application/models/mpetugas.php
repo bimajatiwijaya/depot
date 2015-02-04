@@ -11,7 +11,6 @@ class Mpetugas extends CI_Model {
 	function checkLogin($username, $password)
 	{
 		$this -> db -> select('username,password,idadmin');
-		$this -> db -> select('username,password');
 		$this -> db -> from('admin');
 		$this -> db -> where('username', $username);
 		$this -> db -> where('password', MD5($password));
@@ -58,5 +57,35 @@ class Mpetugas extends CI_Model {
 			   'timeprocess' => date("Y-m-d H:i:s")
             );
 		$this->db->insert('logpetugas', $data); 
+	}
+	function newMember()
+	{
+		$new = $this->db->select_max('idmember', 'newmember');
+		$query = $this->db->get('member');
+		foreach($query->result() as $data)
+		{
+			$id = $data->newmember;
+		}
+		$this -> db -> select('*');
+		$this -> db -> from('member');
+		$this -> db -> where('idmember', $id);
+		$query = $this -> db -> get();
+
+		if($query -> num_rows() > 0)
+		{
+			return $query->result();
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	function flagMember($idusaha)
+	{
+		$data = array(
+               'member' => 1
+		);
+		$this->db->where('idusaha', $idusaha);
+		$this->db->update('usaha', $data); 
 	}
 }

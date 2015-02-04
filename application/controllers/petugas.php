@@ -56,55 +56,6 @@ class Petugas  extends CI_Controller {
 			}
 		}
 	}
-	public function homePetugas($msg=null)
-	{
-		try{
-			$crud = new grocery_CRUD();
-			$crud->set_table('usaha');
-			$crud->set_subject('Data Depot Kota Semarang');
-			$crud->required_fields('IDusaha');
-			$output = $crud->render();
-			$this->_example_output($output);
-		}catch(Exception $e){
-			show_error($e->getMessage().' --- '.$e->getTraceAsString());
-		}
-	}
-	public function isPetugas()
-	{
-		$this->load->library('form_validation');
-		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-		// Validating Name Field
-		$this->form_validation->set_rules('username', 'SK Dinas Kesehatan', 'required|min_length[4]|max_length[15]');
-		// Validating Email Field
-		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|max_length[15]|alpha_dash');
-
-		if ($this->form_validation->run() == FALSE)
-		{
-			$this->index("");
-		}
-		else
-		{
-			$this->load->model('mpetugas');
-			$check = $this->mpetugas->checklogin($this->input->post('username'),$this->input->post('password'));
-			if($check!=0)
-			{
-				foreach($check as $data){
-					$newdata = array(
-						'idadmin'  => $data->idadmin,
-						'petugas'  => $this->input->post('username'),
-						'access'     => '3', // 1 user 2 member 3 acces
-						'logged_in' => date("Y-m-d H:i:s")
-					);
-				}
-				$this->session->set_userdata($newdata);
-				redirect('petugas/homePetugas');
-			}
-			else
-			{
-				$this->index("Username / Password Salah!");
-			}
-		}
-	}
 	/** tabel usaha : data depot **/
 	public function homePetugas($msg=null)
 	{
@@ -152,31 +103,59 @@ class Petugas  extends CI_Controller {
 		try{
 			$crud = new grocery_CRUD();
 			$crud->set_table('member');
+			$crud->columns('idmember','lastlogin');
 			$crud->set_subject('Member Depot Kota Semarang');
+			$crud->set_relation('idusaha','usaha','skpdinkes');
 			$crud->required_fields('idmember');
+			
+			$crud->callback_edit_field('password',array($this,'set_password_input_to_empty'));
+			$crud->callback_add_field('password',array($this,'set_password_input_to_empty'));
+			
 			$crud->callback_after_insert(array($this,'log_b_member_add'));
+			$crud->callback_before_insert(array($this,'encrypt_password_callback'));
 			$crud->callback_before_delete(array($this,'log_b_member_del'));
 			$crud->callback_before_update(array($this,'log_b_member_update'));
+			
 			$output = $crud->render();
 			$this->_example_output($output);			
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
 	}
+	function set_password_input_to_empty() {
+		return "<input type='password' name='password' value='' />";
+	}
+	function encrypt_password_callback($post_array) {
+		$this->load->library('encrypt');
+		$post_array['password'] = md5($post_array['password']);
+		return $post_array;
+	}   
+	public function flag_member_add()
+	{
+		$this->load->model('mpetugas');
+		$data = $this->mpetugas->newMember();
+		foreach($data as $rslt)
+		{
+			$this->mpetugas->flagMember($rslt->idusaha);
+		}
+		return true;
+	}
 	/** (function callback before) log petugas setiap kegiatan berkaitan table member **/
 	public function log_b_member_add()
 	{
-		 $this->load->model('mpetugas');
-		 $maxId = $this->mpetugas->maxiddepot();
-		 $this->mpetugas->insLogPtgs("add member",$this->session->userdata('idadmin'),$maxId);
+		$this->load->model('mpetugas');
+		$data = $this->mpetugas->newMember();
+		foreach($data as $rslt)
+		{
+			$this->mpetugas->insLogPtgs("add member",$this->session->userdata('idadmin'),$rslt->idmember);
+		}
 		return true;
 	}
 	public function log_b_member_del()
 	{
 		$primary_key = $this->uri->segment(4);
-		 $this->load->model('mpetugas');
-		 $maxId = $this->mpetugas->maxiddepot();
-		 $this->mpetugas->insLogPtgs("delete member",$this->session->userdata('idadmin'),$maxId);
+		$this->load->model('mpetugas');
+		$this->mpetugas->insLogPtgs("delete member",$this->session->userdata('idadmin'),$primary_key );
 		return true;
 	}
 	public function log_b_member_update()
@@ -187,6 +166,24 @@ class Petugas  extends CI_Controller {
 		return true;
 	}
 	/** end catat log petugas **/
+	/** tabel laporan : laporan **/
+	public function laporan($msg=null)
+	{
+		try{
+			$crud = new grocery_CRUD();
+			$crud->set_table('laporan');
+			$crud->set_subject('Laporan Masyarakat');
+			$crud->required_fields('idlaporan');
+			$crud->unset_add();
+			$crud->unset_edit();
+			$crud->unset_delete();
+			$output = $crud->render();
+			$this->_example_output($output);			
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	/** end laporan **/
 	public function isiUlang()
 	{
 		$crud = new grocery_CRUD();

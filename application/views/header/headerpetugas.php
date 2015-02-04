@@ -12,7 +12,7 @@
         <meta name="design" content="2013 mPurpose.">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/purpose/css/bootstrap.min.css">
+        <!--link rel="stylesheet" href="<?php echo base_url(); ?>assets/purpose/css/bootstrap.min.css"-->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/purpose/css/icomoon-social.css">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/purpose/css/leaflet.css" />
@@ -64,6 +64,12 @@
 						<li>
 							<?php echo anchor('petugas/homePetugas','Home'); ?>
 						</li>
+						<li>
+							<?php echo anchor('petugas/dataMember','Data Member'); ?>
+						</li>
+						<li>
+							<?php echo anchor('petugas/laporan','Laporan Masyarakat'); ?>
+						</li>
 						<li class="has-submenu">
 							<a href="#">Menu</a>
 							<div class="mainmenu-submenu">
@@ -82,18 +88,6 @@
 											<li><a href="">Homepage (Sample 2)</a></li>
 										</ul>
 										<h4>Laporan Masyarakat</h4>
-									</div>
-								</div><!-- /mainmenu-submenu-inner -->
-								
-							</div><!-- /mainmenu-submenu -->
-										<h4>Laporan Masyarakat</h4>
-										<ul>
-											<li><a href="">Lihat Laporan</a></li>
-										</ul>
-										<h4>Menu 3</h4>
-										<ul>
-											<li><a href="">isi menu 3</a></li>
-										</ul>
 									</div>
 								</div><!-- /mainmenu-submenu-inner -->
 							</div><!-- /mainmenu-submenu -->
