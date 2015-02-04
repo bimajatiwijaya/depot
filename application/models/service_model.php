@@ -46,4 +46,11 @@ class Service_model extends CI_Model{
 			return 0;
 		}
 	}
+	public function insertLaporanDepot($dataLaporan){
+		$this->db->set('namaDepot', $dataLaporan['namadepot']);
+		$this->db->set('alamatDepot', $dataLaporan['alamatdepot']);
+		$this->db->set('masalahDepot', $dataLaporan['masalahdepot']);
+		$this->db->set('namaPelapor', $dataLaporan['namapelapor']);
+		$this->db->insert('depotbermasalah');
+	}
 }

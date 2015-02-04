@@ -13,10 +13,11 @@
 	else{
 		echo "No";
 	}
-	foreach ($data as $key ) {
-		// echo $key['namausaha']."<br>";
-		echo $key['skorcoliform']."<br>";
-	}
+	// foreach ($data as $key ) {
+	// 	// echo $key['namausaha']."<br>";
+	// 	echo $key['skorcoliform']."<br>";
+	// }
+	echo $data;
 ?>
 <hr>
 <?php
