@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/purpose/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/purpose/css/icomoon-social.css">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/purpose/css/leaflet.css" />
 		<!--[if lte IE 8]>
 		    <link rel="stylesheet" href="css/leaflet.ie.css" />

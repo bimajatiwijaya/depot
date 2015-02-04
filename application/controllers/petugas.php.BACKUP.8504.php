@@ -11,17 +11,26 @@ class Petugas  extends CI_Controller {
 	}
 	public function _example_output($output = null)
 	{
+<<<<<<< HEAD
+		//var_dump($this->session->all_userdata());
+=======
+>>>>>>> 5bdd8eba10e286f803f3a585defb826aa2d6b364
 		$this->load->view('header/headerpetugas',$output);
 		$this->load->view('petugas/content');
 		$this->load->view('footer/footerpetugas');
 	}
 	public function index($msg=null)
 	{
+<<<<<<< HEAD
 		$this->session->userdata('access')!=null? $this->homePetugas('') : '';
+=======
+>>>>>>> 5bdd8eba10e286f803f3a585defb826aa2d6b364
 		$data['message'] = $msg==null?null:$msg;
 		$this->load->view('header/headerloginpetugas');
 		$this->load->view('petugas/loginAdmin',$data);
 		$this->load->view('footer/footerpetugas');
+<<<<<<< HEAD
+=======
 	}
 	public function isPetugas()
 	{
@@ -68,6 +77,7 @@ class Petugas  extends CI_Controller {
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
+>>>>>>> 5bdd8eba10e286f803f3a585defb826aa2d6b364
 	}
 	public function isPetugas()
 	{

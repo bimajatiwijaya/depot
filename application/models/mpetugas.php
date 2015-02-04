@@ -11,6 +11,7 @@ class Mpetugas extends CI_Model {
 	function checkLogin($username, $password)
 	{
 		$this -> db -> select('username,password,idadmin');
+		$this -> db -> select('username,password');
 		$this -> db -> from('admin');
 		$this -> db -> where('username', $username);
 		$this -> db -> where('password', MD5($password));
