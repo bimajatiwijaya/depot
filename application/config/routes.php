@@ -40,7 +40,7 @@
 
 $route['default_controller'] = "petugas";
 $route['404_override'] = '';
-
+$route['new_service?wsdl'] = 'nuSoapServer/index/wsdl';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
