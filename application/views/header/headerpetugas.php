@@ -12,7 +12,7 @@
         <meta name="design" content="2013 mPurpose.">
         <meta name="viewport" content="width=device-width">
 
-        <!--link rel="stylesheet" href="<?php echo base_url(); ?>assets/purpose/css/bootstrap.min.css"-->
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/purpose/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/purpose/css/icomoon-social.css">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/purpose/css/leaflet.css" />
@@ -45,7 +45,7 @@
 						<ul>
 			        		<li>
 							<?php
-								if($this->session->userdata('acces')==null)
+								if($this->session->userdata('access')==null)
 								{
 									echo anchor('petugas/formlogin','LOGIN');
 								}
@@ -62,7 +62,7 @@
 					<ul>
 						<li class="logo-wrapper"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/purpose/img/logo.png" width="100%" height="100%" alt="Multipurpose Twitter Bootstrap Template"></a></li>
 						<li>
-							<?php echo anchor('petugas','Home'); ?>
+							<?php echo anchor('petugas/homePetugas','Home'); ?>
 						</li>
 						<li class="has-submenu">
 							<a href="#">Menu</a>
@@ -74,17 +74,19 @@
 											<li><a href="">Data Depot Kota Semarang</a></li>
 											<li><a href="">Homepage (Sample 2)</a></li>
 										</ul>
+									</div>
+									<div>
+										<h4>Member</h4>
+										<ul>
+											<li><?php echo anchor('petugas/dataMember','Data Member'); ?></li>
+											<li><a href="">Homepage (Sample 2)</a></li>
+										</ul>
 										<h4>Laporan Masyarakat</h4>
-										<ul>
-											<li><a href="">Lihat Laporan</a></li>
-										</ul>
-										<h4>Menu 3</h4>
-										<ul>
-											<li><a href="">isi menu 3</a></li>
-										</ul>
 									</div>
 								</div><!-- /mainmenu-submenu-inner -->
+								
 							</div><!-- /mainmenu-submenu -->
+							
 						</li>
 					</ul>
 				</nav>
