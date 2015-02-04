@@ -10,7 +10,7 @@ class Service extends CI_Controller{
 	}
 
 	public function index(){
-		// register service Data Usaha Depot Air
+		// -------------------------------register service Data Usaha Depot Air----------------------------------
 		$this->nusoap_server->register('DataMasterDepot',                // method name
 		array(),        // input parameters
 		array('output' => 'xsd:Array'),    // output parameters
@@ -46,7 +46,7 @@ class Service extends CI_Controller{
 			}
 			return $dataDepot;
 		}
-		// register service cari Data Usaha Depot Air
+		//----------------------------- register service cari Data Usaha Depot Air----------------------------------
 		$this->nusoap_server->register('CariDataDepot',                // method name
 		array('searchby'=>'xsd:string','keyword'=>'xsd:string'),        // input parameters
 		array('output' => 'xsd:Array'),    // output parameters
@@ -101,7 +101,7 @@ class Service extends CI_Controller{
 			
 			return $dataDepot;
 		}
-		//register service uji bakteri tiga terbaik
+		//------------------------------register service uji bakteri tiga terbaik--------------------------------------
 		$this->nusoap_server->register('DataUjiBakteriTerbaik',                // method name
 		array(),        // input parameters
 		array('output' => 'xsd:Array'),    // output parameters
@@ -140,6 +140,30 @@ class Service extends CI_Controller{
 			}
 			return $dataDepot;
 		}
+		//--------------------------register service Laporan depot bermasalah-----------------------------------
+		$this->nusoap_server->register('LaporDepot',                // method name
+		array('namadepot'=>'xsd:string','alamatdepot'=>'xsd:string','masalahdepot'=>'xsd:string','namapelapor'=>'xsd:string'),        // input parameters
+		array('output' => 'xsd:string'),    // output parameters
+		'urn:ServiceUserDepot',                    // namespace
+		'urn:ServiceUserDepot#LaporDepot',                // soapaction
+		'rpc',                                // style
+		'encoded',                            // use
+		'Service untuk mengirim laporan depot bermasalah'            // documentation
+		);
+		function LaporDepot($namadepot,$alamatdepot,$masalahdepot,$namapelapor){
+			// overriding objek global
+			$obj =& get_instance();
+			$dataLaporan=array(
+					'namadepot'=>$namadepot,
+					'alamatdepot'=>$alamatdepot,
+					'masalahdepot'=>$masalahdepot,
+					'namapelapor'=>$namapelapor
+				);
+			$data=$obj->service_model->insertLaporanDepot($dataLaporan);
+			
+			return 'sukses';
+		}
+
 		//result as xml soap
 		$GLOBALS['HTTP_RAW_POST_DATA'] = file_get_contents ('php://input');
 		$HTTP_RAW_POST_DATA = $GLOBALS['HTTP_RAW_POST_DATA'];
