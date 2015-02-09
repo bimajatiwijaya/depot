@@ -17,16 +17,7 @@
   <!--
   <link rel="stylesheet" href="stylesheets/foundation.css">
   -->
-  <?php 
-	if($css_files!=null and $js_files!=null){
-	foreach($css_files as $file): ?>
-		<link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
-	<?php endforeach; ?>
-	<?php foreach($js_files as $file): ?>
-		<script src="<?php echo $file; ?>"></script>
-	<?php endforeach;
-	}
-	?>
+  
   <!-- Included CSS Files (Compressed) -->
   <link rel="stylesheet" href="<?php echo base_url().'assets/base2013/stylesheets/foundation.min.css'; ?>">
   <link rel="stylesheet" href="<?php echo base_url().'assets/base2013/stylesheets/main.css'; ?>">
@@ -43,7 +34,7 @@
   <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-	
+
 </head>
 <body>
 <!-- ######################## Main Menu ######################## -->

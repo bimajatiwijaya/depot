@@ -5,23 +5,34 @@ class Petugas  extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->database();
+
 		$this->load->helper('url');
+		$this->load->database();
 		$this->load->library('grocery_CRUD');
+		$this->_init();
+	}
+
+	private function _init()
+	{
+		$this->output->set_template('petugas');
+
+		$this->load->js('assets/themes/default/js/jquery-1.9.1.min.js');
+		$this->load->js('assets/themes/default/hero_files/bootstrap-transition.js');
+		$this->load->js('assets/themes/default/hero_files/bootstrap-collapse.js');
 	}
 	public function _example_output($output = null)
 	{
-		$this->load->view('header/headerpetugas',$output);
-		$this->load->view('petugas/content');
-		$this->load->view('footer/footerpetugas');
+		$this->session->userdata('petugas')==null? redirect('petugas') : true;
+		$this->load->view('petugas/content',$output);
 	}
 	public function index($msg=null)
 	{
-		$this->session->userdata('access')!=null? $this->homePetugas('') : '';
+		$this->output->set_template('loginpetugas');
+		$this->session->userdata('access')!=null? redirect('petugas/homePetugas') : '';
 		$data['message'] = $msg==null?null:$msg;
-		$this->load->view('header/headerloginpetugas');
+		//$this->load->view('header/headerloginpetugas');
 		$this->load->view('petugas/loginAdmin',$data);
-		$this->load->view('footer/footerpetugas');
+		//$this->load->view('footer/footerpetugas');
 	}
 	public function isPetugas()
 	{
@@ -64,7 +75,7 @@ class Petugas  extends CI_Controller {
 			$crud->set_table('usaha');
 			$crud->set_subject('Data Depot Kota Semarang');
 			$crud->required_fields('IDusaha');
-			$crud->callback_after_insert(array($this,'log_b_usaha_add'));
+			$crud->callback_after_insert(array($this,'log_a_usaha_add'));
 			$crud->callback_before_delete(array($this,'log_b_usaha_del'));
 			$crud->callback_before_update(array($this,'log_b_usaha_update'));
 			$output = $crud->render();
@@ -74,11 +85,12 @@ class Petugas  extends CI_Controller {
 		}
 	}
 	/** (function callback before) log petugas setiap kegiatan berkaitan table usaha **/
-	public function log_b_usaha_add()
+	public function log_a_usaha_add()
 	{
-		 $this->load->model('mpetugas');
-		 $maxId = $this->mpetugas->maxiddepot();
-		 $this->mpetugas->insLogPtgs("add depot",$this->session->userdata('idadmin'),$maxId);
+		$this->load->model('mpetugas');
+		$maxId = $this->mpetugas->maxiddepot();
+		$this->mpetugas->insLogPtgs("add depot",$this->session->userdata('idadmin'),$maxId);
+		
 		return true;
 	}
 	public function log_b_usaha_del()
@@ -188,9 +200,9 @@ class Petugas  extends CI_Controller {
 	{
 		$crud = new grocery_CRUD();
 
-		$crud->set_table('usaha');
-		$crud->set_relation_n_n('isiulang', 'usaha', 'gantiair', 'gantiair.IDUsaha', 'IDUsaha', 'TglIsi','IDUsaha');
-		$crud->set_subject('usaha');
+		$crud->set_table('gantiair');
+		$crud->set_relation('IDUsaha', 'usaha', 'NmUsaha');
+		$crud->set_subject('Isi Ulang');
 		$crud->unset_columns('AlmUsaha','NmUsaha','KecUsaha','KtUsaha','TelpUsaha','NmPmlk','AlmPmlk','Tk','KecPmlk','isiulang');
 
 		//$crud->fields('NmUsaha','isiulang');

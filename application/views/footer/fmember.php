@@ -19,14 +19,14 @@
 
 
 		<!-- end page wrap) -->
-		<!-- Included JS Files (Compressed) 
+		<!-- Included JS Files (Compressed) -->
 		<script src="<?php echo base_url().'assets/base2013/javascripts/foundation.min.js'; ?>" type="text/javascript">
 		</script>
-		<!-- Initialize JS Plugins 
+		<!-- Initialize JS Plugins -->
 		<script src="<?php echo base_url().'assets/base2013/javascripts/app.js'; ?>" type="text/javascript">
 		</script>
-		<!-- Masonry for galleries 
-		<script src="<?php echo base_url().'assets/base2013/javascripts/masonry.js'; ?>" type="text/javascript">-->
+		<!-- Masonry for galleries -->
+		<script src="<?php echo base_url().'assets/base2013/javascripts/masonry.js'; ?>" type="text/javascript">
 		</script>
 		<script type="text/javascript">
 //<![CDATA[

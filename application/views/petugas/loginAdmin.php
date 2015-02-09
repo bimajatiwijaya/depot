@@ -11,8 +11,8 @@
         <div class="section">
 	    	<div class="container">
 				<div class="row">
-					<div class="col-sm-5">
-						<div class="basic-login">
+					<div class="span4 well">
+						<div>
 							<?php
 							echo validation_errors();
 							$attributes = array('role' => 'form');
@@ -28,7 +28,7 @@
 								</div>
 								<div class="form-group">
 									<!--a href="" class="forgot-password">Forgot password?</a-->
-									<button type="submit" class="btn pull-right">Login</button>
+									<button type="submit">Login</button>
 									<div class="clearfix"></div>
 								</div>
 							<?php echo form_close(); ?>
