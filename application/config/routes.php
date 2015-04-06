@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "user";
+$route['default_controller'] = "costumer";
 $route['404_override'] = '';
 $route['new_service?wsdl'] = 'nuSoapServer/index/wsdl';
 

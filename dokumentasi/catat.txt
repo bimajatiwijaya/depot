@@ -1,0 +1,7 @@
+front end
+menampilkan peringkat depot {usaha}
+melihat profil depot {pencarian}
+melihat ujikimia,ujifiskim 3 terakhir
+registrasi member
+laporan warga bisa upload(g wajib){laporan}
+
